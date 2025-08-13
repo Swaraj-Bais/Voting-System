@@ -2,7 +2,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
-    $email    = trim($_POST['email']);
+  
 
     if (empty($username) || empty($password) || empty($email)) {
         die("All fields are required.");
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $stmt = $conn->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("");
     if (!$stmt) {
         die("Prepare failed: " . $conn->error);
     }

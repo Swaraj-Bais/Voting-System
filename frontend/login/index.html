@@ -3,23 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="main">
-        <form action="">
+        <div class="container1">
+            <div class="info">
+                <h1 id="h1">Voting System</h1>
+                <h1>Welcome to Our Application</h1>
+                <p>Please login to continue</p>
+                <button id="b2">Read more</button>
+            </div>
+            <form action="">
+                <div id="div1">
+                    <label id="head">Login</label>
+                    <div class="form-group">
+                        <label for="login-username">Name</label>
+                        <input style="margin-left: 3px;" placeholder="Enter Name" type="text" id="login-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input placeholder="Enter Password" type="password" id="login-password" name="password" required>
+                    </div>
+                    <label>
+                        <p id="p1">Forget Password</p>
+                    </label>
+                    <button type="button" class="login-btn" id="b1">Login</button>
+                    <button type="button" class="login-btn" id="b3">Register</button>
+                </div>
+            </form>
+        </div>
 
-            <div class="form-group">
-                <label for="username">Name</label>
-                <input type="text" id="username" name="username" required>
+        <div id="container2">
+            <form id="registation" action="../../backend/auth/singup.php" method="post">
+                <div id="div2">
+                    <label id="register-head">Register</label>
+                    <div class="form-group">
+                        <label for="register-username">Name</label>
+                        <div class="diva">
+                            <i class="fa-solid fa-user"></i>
+                            <input style="margin-left: 3px;" placeholder="Enter Name" type="text" id="register-username" class="inp" name="username" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="diva">
+                            <label for="register-password">Email</label>
+                            <input placeholder="Enter Email" type="text" id="register-email" class="inp" name="email" required>
+                        </div>
+                    </div>
+                    <label>
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input placeholder="Enter Password" type="password" id="register-password" class="inp" name="password" required>
+                    </div>
+                    <button type="button" class="login-btn" id="b4">Login</button>
+                    <button type="submit" class="login-btn" id="b5">Register</button>
+                </div>
+
+            </form>
+            <div class="info">
+                <h1 id="h2">Voting System</h1>
+                <h1>Welcome to Our Application</h1>
+                <p>Please register to continue</p>
+                <button id="b6">Read more</button>
             </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-         
-            <button type="submit">Signup</button>
-        </form>
+        </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>

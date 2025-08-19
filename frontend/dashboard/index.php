@@ -40,6 +40,13 @@ $result = $conn->query($sql);
         </div>
         <div id="right">
             <h1>All Standing Voting Parties</h1>
+            <div id="header">
+                <h3>Party Name</h3>
+                <h3 id="lead">Leader</h3>
+                <h3>Image</h3>
+                <h3 id="votes">Votes</h3>
+                <h3>Customise</h3>
+            </div>
             <div id="parties">
                 <?php
                 if ($result->num_rows > 0) {
@@ -48,8 +55,13 @@ $result = $conn->query($sql);
                         echo '<div class="party">';
                         echo '<p class="party-name">' . htmlspecialchars($row["party"]) . '</p>';
                         echo '<p class="leader-name">' . htmlspecialchars($row["leader"]) . '</p>';
-                        echo '<img alt="Party Leader Image">';
+                        echo '<img src="' . htmlspecialchars($row["image"]) . '" alt="Party Leader Image" id="imgpos">';
+                        echo '<div class="count"><div class="votes">' . $row["votes"] . '</div></div> 
+                        <form action="" method="post">
+                           <button>Edit</button>
+                        </form>';
                         echo '</div>';
+                      
                     }
                 } else {
                     echo '<div class="no-parties">No parties found in the database.</div>';

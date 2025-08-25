@@ -21,12 +21,14 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
     <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
     <div id="main">
         <div id="left">
@@ -42,35 +44,40 @@ $result = $conn->query($sql);
             <h1>All Standing Voting Parties</h1>
             <div id="header">
                 <h3>Party Name</h3>
-                <h3 id="lead">Leader</h3>
+                <h3>Leader</h3>
                 <h3>Image</h3>
-                <h3 id="votes">Votes</h3>
+                <h3 id="votes-header">Votes</h3>
                 <h3>Customise</h3>
             </div>
             <div id="parties">
-                <?php
-                if ($result->num_rows > 0) {
-                    // Output data of each row
-                    while($row = $result->fetch_assoc()) {
-                        echo '<div class="party">';
-                        echo '<p class="party-name">' . htmlspecialchars($row["party"]) . '</p>';
-                        echo '<p class="leader-name">' . htmlspecialchars($row["leader"]) . '</p>';
-                        echo '<img src="' . htmlspecialchars($row["image"]) . '" alt="Party Leader Image" id="imgpos">';
-                        echo '<div class="count"><div class="votes">' . $row["votes"] . '</div></div> 
-                        <form action="" method="post">
-                           <button>Edit</button>
-                        </form>';
-                        echo '</div>';
-                      
-                    }
-                } else {
-                    echo '<div class="no-parties">No parties found in the database.</div>';
-                }
-                ?>
-            </div>
+    <?php 
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<div class="party">';
+            echo '<p class="party-name">' . htmlspecialchars($row["party"]) . '</p>';
+            echo '<p class="leader-name">' . htmlspecialchars($row["leader"]) . '</p>';
+            echo '<img src="' . htmlspecialchars($row["image"]) . '" alt="Party Leader Image" class="party-image">';
+            echo '<div class="votes">' . $row["votes"] . '</div>';
+            // Form with hidden ID
+            echo '<form action="../edit/index.php" method="get">';
+            echo '<input type="hidden" name="id" value="' . htmlspecialchars($row["id"]) . '">';
+            echo '<button type="submit">Edit</button>';
+            echo '</form>';
+
+            echo '</div>';
+        }
+    } else {
+        echo '<div class="no-parties">No parties found in the database.</div>';
+    }
+    ?>
+</div>
+
         </div>
     </div>
+
+
 </body>
+
 </html>
 
 <?php

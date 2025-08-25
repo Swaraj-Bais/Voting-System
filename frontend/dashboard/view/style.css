@@ -80,9 +80,10 @@ button:hover {
     margin-top: 20px;
 }
 
+/* Fixed header spacing */
 #header {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     background-color: #4caf50;
     color: white;
@@ -90,26 +91,15 @@ button:hover {
     border-radius: 10px;
     margin-bottom: 20px;
     font-weight: bold;
+    text-align: center;
 }
 
 #header h3 {
-    margin-right: 20px;
-    min-width: 150px;
     font-size: 16px;
 }
-
-#header h3:nth-child(3) {
-    margin-left: 20px;
-    margin-right: 20px;
-    min-width: 80px;
-    text-align: center;
-}
-
-#header h3:last-child {
-    margin-left: auto;
-    margin-right: 40px;
-    min-width: 80px;
-    text-align: center;
+#votes-header{
+    position:relative;
+    right:30px;
 }
 
 #parties {
@@ -119,15 +109,17 @@ button:hover {
     margin-top: 20px;
 }
 
+/* Fixed party row spacing */
 .party {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     background-color: #f9f9f9;
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: transform 0.2s;
+    text-align: center;
 }
 
 .party:hover {
@@ -139,45 +131,30 @@ button:hover {
     font-weight: bold;
     font-size: 18px;
     color: #333;
-    margin-right: 20px;
-    min-width: 150px;
 }
 
 .leader-name {
     font-size: 16px;
     color: #666;
-    margin-right: 20px;
-    min-width: 150px;
 }
 
 .votes {
     font-size: 20px;
-    background-color:blanchedalmond;
-    color: white;
+    background-color: blanchedalmond;
     text-align: center;
     padding: 10px 15px;
     border-radius: 20px;
-    min-width: 60px;
     font-weight: bold;
+    width:70%;    
 }
 
-.count {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 20px;
-    margin-right: 20px;
-    position: relative;
-    left:50px;
-}
-
-img {
+.party-image {
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    margin-left: 20px;
     border: 3px solid #4caf50;
     object-fit: cover;
+    justify-self: center;
 }
 
 .no-parties {
@@ -190,24 +167,67 @@ img {
     border-radius: 10px;
 }
 
-
-#votes{
-    margin-left: 60px;
-    color: black;
+form button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 14px;
 }
 
-#imgpos{
-    position:relative;
-    right:5px;
-}
-#lead{
-    position: relative;
-    left:20px;
+form button:hover {
+    background-color: #45a049;
 }
 
-
-
-form{
-    margin-right: 200px;
+/* Responsive Design */
+@media (max-width: 768px) {
+    #main {
+        flex-direction: column;
+    }
+    
+    #left {
+        width: 100%;
+        height: auto;
+    }
+    
+    #right {
+        width: 100%;
+        height: auto;
+    }
+    
+    #header,
+    .party {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    #header h3 {
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    #header h3:last-child {
+        border-bottom: none;
+    }
 }
 
+@media (max-width: 480px) {
+    h1 {
+        font-size: 18px;
+    }
+    
+    #right h1 {
+        font-size: 22px;
+    }
+    
+    button {
+        padding: 15px;
+        font-size: 1rem;
+    }
+    
+    .party-image {
+        width: 60px;
+        height: 60px;
+    }
+}

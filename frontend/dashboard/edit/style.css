@@ -1,0 +1,90 @@
+body {
+    overflow: hidden;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Montserrat', 'Inter', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+p{
+    text-align: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.left {
+    width: 60%;
+    height: 100vh;
+    color: white;
+    font-size: 3rem;
+    padding: 20px;
+    overflow: hidden;
+    margin-left: 0.5rem;
+    font-family: 'Montserrat', 'Inter', 'Poppins', sans-serif; 
+    font-weight: 900;
+}
+
+#main {
+    width: 100%;
+    height: 100vh;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background-image: url(bg.png);
+    background-size: cover;
+}
+
+label {
+    font-size: 25px;
+    font-family: 'Montserrat', 'Inter', sans-serif;
+    font-weight: 500;
+    color: white;
+    /* Left align labels */
+    /* align-self: flex-start; */
+    text-align: left;
+    position: relative;
+
+    width: 300px; /* Same width as inputs for proper alignment */
+}
+
+form {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    right: 250px;
+}
+
+/* Added missing input and button styling */
+input[type="text"] {
+    font-family: 'Montserrat', 'Inter', sans-serif;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 300px;
+}
+
+button {
+    font-family: 'Montserrat', 'Inter', sans-serif;
+    padding: 12px 24px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 300px; /* Same width as inputs */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+

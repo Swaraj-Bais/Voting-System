@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+	header("Location: ../../login/index.html");
+	exit;
+}
+
 // Database connection
 $host = "127.0.0.1";
 $user = "root";
@@ -14,23 +20,30 @@ if ($conn->connect_error) {
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $party = $_POST['party'];
-    $leader = $_POST['leader'];
-    $image = $_POST['image'];
+    $party = trim($_POST['party']);
+    $leader = trim($_POST['leader']);
+    $image = trim($_POST['image']);
+
+    if ($party === '' || $leader === '' || $image === '') {
+        die("All fields are required.");
+    }
 
     // votes start with 0
     $votes = 0;
 
-    $sql = "INSERT INTO parties (party, leader, votes, image) 
-            VALUES ('$party', '$leader', $votes, '$image')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "<p style='color:green;'>New party added successfully!</p>";
-        // Redirect to the dashboard or another page after successful submissio
-        header("Location: ../view/index.php");
-    } else {
-        echo "<p style='color:red;'>Error: " . $conn->error . "</p>";
+    $stmt = $conn->prepare("INSERT INTO parties (party, leader, votes, image) VALUES (?, ?, ?, ?)");
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
     }
+    $stmt->bind_param("ssis", $party, $leader, $votes, $image);
+
+    if ($stmt->execute()) {
+        header("Location: ../view/index.php");
+        exit;
+    } else {
+        echo "<p style='color:red;'>Error: " . $stmt->error . "</p>";
+    }
+    $stmt->close();
 }
 ?>
 <!DOCTYPE html>

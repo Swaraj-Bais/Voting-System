@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+	header("Location: ../../login/index.html");
+	exit;
+}
+
 // Database connection
 $host = "127.0.0.1";
 $user = "root";
@@ -18,32 +24,39 @@ $id = "";
 // Fetch party details if ID is provided
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM parties WHERE id = '$id'";
-    $result = $conn->query($sql);
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $led  = $row['leader'];
-        $part = $row['party'];
-        $img  = $row['image'];
+    $stmt = $conn->prepare("SELECT leader, party, image FROM parties WHERE id = ? LIMIT 1");
+    if ($stmt) {
+        $stmt->bind_param("i", $id);
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            if ($result && $result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $led  = $row['leader'];
+                $part = $row['party'];
+                $img  = $row['image'];
+            }
+        }
+        $stmt->close();
     }
 }
 
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $party  = $_POST['party'];
-    $leader = $_POST['leader'];
-    $image  = $_POST['image'];
-    $id     = $_POST['id'];
+    $party  = trim($_POST['party']);
+    $leader = trim($_POST['leader']);
+    $image  = trim($_POST['image']);
+    $id     = intval($_POST['id']);
 
-    // Update query instead of insert
-    $sql = "UPDATE parties 
-            SET party = '$party', leader = '$leader', image = '$image'
-            WHERE id = '$id'";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "<p style='color:green;'>Party updated successfully!</p>";
-        header("Location: ../view/index.php");
-        exit;
+    $stmt = $conn->prepare("UPDATE parties SET party = ?, leader = ?, image = ? WHERE id = ?");
+    if ($stmt) {
+        $stmt->bind_param("sssi", $party, $leader, $image, $id);
+        if ($stmt->execute()) {
+            header("Location: ../view/index.php");
+            exit;
+        } else {
+            echo "<p style='color:red;'>Error: " . $stmt->error . "</p>";
+        }
+        $stmt->close();
     } else {
         echo "<p style='color:red;'>Error: " . $conn->error . "</p>";
     }

@@ -1,4 +1,16 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+	header("Location: ../../login/index.html");
+	exit;
+}
+
+// Only admins can access this dashboard
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+	header("Location: ../../vote/index.php");
+	exit;
+}
+
 // Database connection
 $host = "127.0.0.1";
 $user = "root";
@@ -36,8 +48,9 @@ $result = $conn->query($sql);
                 <h1>Voting System</h1>
             </div>
             <div class="menu">
-                <button onclick="location.href='add_party.php'">Add New Participant</button>
-                <button onclick="location.href='remove_party.php'">Remove Participant</button>
+                <button onclick="location.href='../add_paricipant/index.php'">Add New Participant</button>
+                <!-- <button onclick="location.href='index.php'" disabled>Remove Participant</button> -->
+                <button onclick="location.href='logout.php'">Logout</button>
             </div>
         </div>
         <div id="right">
@@ -61,7 +74,7 @@ $result = $conn->query($sql);
             // Form with hidden ID
             echo '<form action="../edit/index.php" method="get">';
             echo '<input type="hidden" name="id" value="' . htmlspecialchars($row["id"]) . '">';
-            echo '<button type="submit">Edit</button>';
+            echo '<button type="submit" id="edit">Edit</button>';
             echo '</form>';
 
             echo '</div>';

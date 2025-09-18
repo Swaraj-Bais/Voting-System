@@ -175,3 +175,14 @@ button{
 .inp{
     padding-left:20px;
 }
+
+/* Responsive without changing existing look */
+@media (max-width: 900px){
+    .container1,#container2{ width: 95%; height: auto; min-height: 530px; }
+    .info, form{ width: 100%; padding: 40px 16px; }
+}
+@media (max-width: 480px){
+    #head, #register-head{ font-size: 40px; }
+    label{ font-size: 16px; }
+    .login-btn{ left: 0; width: 60%; }
+}

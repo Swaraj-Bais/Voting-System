@@ -36,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sss", $username, $hashedPassword, $email);
 
     if ($stmt->execute()) {
-        echo "New user registered successfully!";
         header("Location: ../../frontend/login/index.html");
         exit;
     } else {
